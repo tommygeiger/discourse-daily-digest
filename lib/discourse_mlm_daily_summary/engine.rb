@@ -67,7 +67,7 @@ module DiscourseMlmDailySummary
 
       module ::Jobs
         class EnqueueMlmDailySummary < Jobs::Scheduled
-          every 1.minute
+          every 1.day
 
           def execute(args)
             return if SiteSetting.disable_mailing_list_mode?
@@ -87,7 +87,6 @@ module DiscourseMlmDailySummary
                 .where(id: enabled_ids)
                 .where(staged: false)
                 .where("#{!SiteSetting.must_approve_users?} OR approved OR moderator OR admin")
-                .where("CURRENT_TIMESTAMP.hour = 21") # send at certain hour
                 .pluck(:id)
           end
 
