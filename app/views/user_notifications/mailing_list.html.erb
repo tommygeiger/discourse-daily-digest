@@ -3,12 +3,12 @@
   <thead>
     <td style='padding: 10px 10px; background-color: #<%= @header_bgcolor %>;'>
       <a href='<%= Discourse.base_url %>' style='color: #<%= @anchor_color %>'>
-        <% if logo_url.blank? %>
+<!--         <% if logo_url.blank? %>
           <%= SiteSetting.title %>
         <% else %>
           <img src='<%= logo_url %>' style='max-height: 35px; min-height: 35px; height: 35px;' class='site-logo'></a>
         <% end %>
-        <br />
+        <br /> -->
         <div style='padding-top: 10px;'>
           <%= raw(t 'user_notifications.mailing_list.why', site_link: html_site_link, date: @since_formatted) %>
         </div>
