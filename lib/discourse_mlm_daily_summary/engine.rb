@@ -68,7 +68,7 @@ module DiscourseMlmDailySummary
       module ::Jobs
         class EnqueueMlmDailySummary < Jobs::Scheduled
           every :day, at "5:00 AM"
-          
+
           def execute(args)
             return if SiteSetting.disable_mailing_list_mode?
             target_user_ids.each do |user_id|
