@@ -87,7 +87,7 @@ module DiscourseMlmDailySummary
                 .where(id: enabled_ids)
                 .where(staged: false)
                 .where("#{!SiteSetting.must_approve_users?} OR approved OR moderator OR admin")
-                .where("CURRENT_TIMESTAMP.hour = '21'") # send at certain hour
+                .where("CURRENT_TIMESTAMP.hour = 21") # send at certain hour
                 .pluck(:id)
           end
 
