@@ -67,7 +67,7 @@ module DiscourseMlmDailySummary
 
       module ::Jobs
         class EnqueueMlmDailySummary < Jobs::Scheduled
-          every 1.day
+          every 1.minute
 
           def execute(args)
             return if SiteSetting.disable_mailing_list_mode?
