@@ -67,7 +67,7 @@ module DiscourseMlmDailySummary
 
       module ::Jobs
         class EnqueueMlmDailySummary < Jobs::Scheduled
-          every 1.hour
+          every :day, at "5:00 AM"
 
           def execute(args)
             return if SiteSetting.disable_mailing_list_mode?
@@ -87,8 +87,8 @@ module DiscourseMlmDailySummary
                 .where(id: enabled_ids)
                 .where(staged: false)
                 .where("#{!SiteSetting.must_approve_users?} OR approved OR moderator OR admin")
-                .where("date_part('hour', first_seen_at) = date_part('hour', CURRENT_TIMESTAMP)")           # where the hour of first_seen_at is the same as the current hour
-                .where("COALESCE(first_seen_at, '2010-01-01') <= CURRENT_TIMESTAMP - '23 HOURS'::INTERVAL") # don't send unless you've been around for a day already
+#                 .where("date_part('hour', first_seen_at) = date_part('hour', CURRENT_TIMESTAMP)")           # where the hour of first_seen_at is the same as the current hour
+#                 .where("COALESCE(first_seen_at, '2010-01-01') <= CURRENT_TIMESTAMP - '23 HOURS'::INTERVAL") # don't send unless you've been around for a day already
                 .pluck(:id)
           end
 
