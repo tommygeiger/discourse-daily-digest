@@ -68,7 +68,6 @@ module DiscourseDailyEmail
           every 1.minute
 
           def execute(args)
-            return
             target_user_ids.each do |user_id|
               Jobs.enqueue(:user_email, type: :daily_email, user_id: user_id)
             end
@@ -86,11 +85,8 @@ module DiscourseDailyEmail
 #                 .where() Only subscribers!
                 .pluck(:id)
           end
-
         end
       end
-
     end
-
   end
 end
