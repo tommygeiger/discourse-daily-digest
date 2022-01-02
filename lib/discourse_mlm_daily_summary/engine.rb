@@ -1,23 +1,21 @@
-module DiscourseMlmDailySummary
+module DiscourseDailyEmail
   class Engine < ::Rails::Engine
-    isolate_namespace DiscourseMlmDailySummary
-
+    isolate_namespace DiscourseDailyEmail
     config.after_initialize do
-
-      User.register_custom_field_type('user_mlm_daily_summary_enabled', :boolean)
-
+      User.register_custom_field_type('user_daily_email_enabled', :boolean)
       require_dependency 'user_notifications'
       class ::UserNotifications
         
-         def apply_notification_styles(email)
+        def apply_notification_styles(email)
                    email.html_part.body = Email::Styles.new(email.html_part.body.to_s).tap do |styles|
                    styles.format_basic
                    styles.format_html
                    end.to_html
                    email
-         end
+        end
+        
         def mailing_list(user, opts={})
-          prepend_view_path "plugins/discourse-mlm-daily-summary/app/views"
+          prepend_view_path "plugins/discourse-daily-email/app/views"
 
           @since = opts[:since] || 1.day.ago
           @since_formatted = short_date(@since)
@@ -54,31 +52,30 @@ module DiscourseMlmDailySummary
 
       require_dependency 'user_serializer'
       class ::UserSerializer
-        attributes :user_mlm_daily_summary_enabled
+        attributes :user_daily_email_enabled
 
-        def user_mlm_daily_summary_enabled
-          if !object.custom_fields["user_mlm_daily_summary_enabled"]
-            object.custom_fields["user_mlm_daily_summary_enabled"] = false
+        def user_daily_email_enabled
+          if !object.custom_fields["user_daily_email_enabled"]
+            object.custom_fields["user_daily_email_enabled"] = false
             object.save
           end
-          object.custom_fields["user_mlm_daily_summary_enabled"]
+          object.custom_fields["user_daily_email_enabled"]
         end
       end
 
       module ::Jobs
-        class EnqueueMlmDailySummary < Jobs::Scheduled
+        class EnqueueDailyEmail < Jobs::Scheduled
           every 1.minute
 
           def execute(args)
-            return if SiteSetting.disable_mailing_list_mode?
+            return
             target_user_ids.each do |user_id|
-              Jobs.enqueue(:user_email, type: :mailing_list, user_id: user_id)
+              Jobs.enqueue(:user_email, type: :daily_email, user_id: user_id)
             end
           end
 
           def target_user_ids
-            # Users who want to receive daily mailing list emails
-            enabled_ids = UserCustomField.where(name: "user_mlm_daily_summary_enabled", value: "true").pluck(:user_id)
+            enabled_ids = UserCustomField.where(name: "user_daily_email_enabled", value: "true").pluck(:user_id)
             User.real
                 .activated
                 .not_suspended
@@ -86,7 +83,7 @@ module DiscourseMlmDailySummary
                 .joins(:user_option)
                 .where(id: enabled_ids)
                 .where(staged: false)
-                .where("#{!SiteSetting.must_approve_users?} OR approved OR moderator OR admin")
+#                 .where() Only subscribers!
                 .pluck(:id)
           end
 
