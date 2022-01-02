@@ -1,15 +1,15 @@
-# name: discourse-mlm-daily-summary
-# about: Brings back the daily summary email for mailing list mode users.
+# name: discourse-daily-email
+# about: Daily email for discourse users
 # version: 0.1
-# author: Joe Buhlig joebuhlig.com
-# url: https://www.github.com/joebuhlig/discourse-mlm-daily-summary
+# author: Tommy Geiger
+# url: https://www.github.com/tommygeiger/discourse-daily-email
 
-enabled_site_setting :mlm_daily_summary_enabled
+enabled_site_setting :daily_email_enabled
 
-DiscoursePluginRegistry.serialized_current_user_fields << "user_mlm_daily_summary_enabled"
+DiscoursePluginRegistry.serialized_current_user_fields << "user_daily_email_enabled"
 
-load File.expand_path('../lib/discourse_mlm_daily_summary/engine.rb', __FILE__)
+load File.expand_path('../lib/discourse_daily_email/engine.rb', __FILE__)
 
 after_initialize do
-  register_editable_user_custom_field :user_mlm_daily_summary_enabled
+  register_editable_user_custom_field :user_daily_email_enabled
 end
