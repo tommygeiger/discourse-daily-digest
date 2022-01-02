@@ -1,1 +1,3 @@
-A plugin for Discourse that brings back the daily summary email for mailing list mode users.
+Discourse plugin to send daily digest emails to users.
+
+Forked from [Disourse MLM Daily Summary](https://github.com/procourse/discourse-mlm-daily-summary)
