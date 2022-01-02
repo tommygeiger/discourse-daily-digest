@@ -1,4 +1,4 @@
 plugins:
-  mlm_daily_summary_enabled:
+  daily_email_enabled:
     default: true
     client: true
