@@ -1,6 +1,6 @@
 en:
   js:
-    mlm_daily_summary:
-      daily: "Send daily email summaries"
-      preference_label: "Enable daily summaries"
-      instructions: "You will receive a daily summary of the day's activity."
+    daily_email:
+      daily: "Receive Daily Email Digest"
+      preference_label: "Enable daily email digest"
+      instructions: "You will receive a daily email digest of recent site activity"
