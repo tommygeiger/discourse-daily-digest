@@ -1,8 +1,8 @@
-{{#if siteSettings.mlm_daily_summary_enabled}}
+{{#if siteSettings.daily_email_enabled}}
   <div class="control-group">
-    <label class="control-label">{{i18n 'mlm_daily_summary.daily'}}</label>
-    {{preference-checkbox labelKey="mlm_daily_summary.preference_label" checked=model.custom_fields.user_mlm_daily_summary_enabled}}
+    <label class="control-label">{{i18n 'daily_email.daily'}}</label>
+    {{preference-checkbox labelKey="daily_email.preference_label" checked=model.custom_fields.user_daily_email_enabled}}
     {{log this}}
-    <div class='instructions'>{{{i18n 'mlm_daily_summary.instructions'}}}</div>
+    <div class='instructions'>{{{i18n 'daily_email.instructions'}}}</div>
   </div>
 {{/if}}
