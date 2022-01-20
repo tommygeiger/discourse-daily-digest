@@ -1,6 +1,6 @@
 en:
   site_settings:
-    mlm_daily_summary_enabled: 'Allow users to receive a daily email when on mailing list mode.'
+    daily_email_enabled: 'Allow users to receive a daily email when on mailing list mode.'
   user_notifications:
     mailing_list:
       why: "All activity on %{site_link} for %{date}"   
