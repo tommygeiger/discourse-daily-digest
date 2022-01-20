@@ -82,7 +82,6 @@ module DiscourseDailyEmail
                 .joins(:user_option)
                 .where(id: enabled_ids)
                 .where(staged: false)
-#                 .where() Only subscribers!
                 .pluck(:id)
           end
         end
