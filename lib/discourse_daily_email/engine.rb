@@ -82,6 +82,7 @@ module DiscourseDailyEmail
                 .joins(:user_option)
                 .where(id: enabled_ids)
                 .where(staged: false)
+                .where("#{!SiteSetting.must_approve_users?} OR approved OR moderator OR admin")
                 #where subscriber group member
                 .pluck(:id)
           end
