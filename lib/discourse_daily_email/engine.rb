@@ -3,6 +3,8 @@ module DiscourseDailyEmail
     isolate_namespace DiscourseDailyEmail
     config.after_initialize do
       User.register_custom_field_type('user_daily_email_enabled', :boolean)
+
+      require_dependency 'email'
       require_dependency 'user_notifications'
       require_dependency 'user_serializer'
       
@@ -17,16 +19,31 @@ module DiscourseDailyEmail
         end
       end
 
-      module ::Jobs
-        class EnqueueDailyEmail < Jobs::Scheduled
+      module Jobs
+        class DailyEmail < ::Jobs::Scheduled
           every 1.minute
+
           def execute(args)
-            target_user_ids.each do |user_id|
-              Jobs.enqueue(:user_email, type: UserNotifications::digest, user_id: user_id)
+            target_users.each do [user]
+
+              message, skip_reason = UserNotifications.public_send(:digest, user, since: user.last_seen_at)
+              
+              if message
+                message.to = params[:email]
+                begin
+                  Email::Sender.new(message, :digest).send
+                  render json: success_json
+                rescue => e
+                  render json: { errors: [e.message] }, status: 422
+                end
+              else
+                render json: { errors: skip_reason }
+              end
             end
+
           end
 
-          def target_user_ids
+          def target_users
             enabled_ids = UserCustomField.where(name: "user_daily_email_enabled", value: "true").pluck(:user_id)
             User.real
                 .activated
@@ -34,7 +51,6 @@ module DiscourseDailyEmail
                 .joins(:user_option)
                 .where(id: enabled_ids)
                 #where subscriber group member
-                .pluck(:id)
           end
         end
       end
