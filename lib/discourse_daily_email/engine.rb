@@ -32,15 +32,10 @@ module DiscourseDailyEmail
                 message.to = user.email
                 begin
                   Email::Sender.new(message, :digest).send
-                  render json: success_json
                 rescue => e
-                  render json: { errors: [e.message] }, status: 422
                 end
-              else
-                render json: { errors: skip_reason }
               end
             end
-
           end
 
           def target_users
