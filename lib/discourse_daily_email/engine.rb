@@ -29,7 +29,7 @@ module DiscourseDailyEmail
               message, skip_reason = UserNotifications.public_send(:digest, user, since: user.last_seen_at)
               
               if message
-                message.to = params[:email]
+                message.to = user.email
                 begin
                   Email::Sender.new(message, :digest).send
                   render json: success_json
