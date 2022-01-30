@@ -21,12 +21,17 @@ module DiscourseDailyEmail
       module ::Jobs
         class DailyEmail < Jobs::Scheduled
           every 1.minute
-
+          
           def execute(args)
+            
+            puts "Schedule test"
+            
             target_users.each do |user|
-#               message = UserNotifications.digest()
-#               Email::Sender.new(message, :digest).send
-              Jobs.enqueue(:user_email, type: :digest, user_id: user)
+              
+              message = UserNotifications.digest(user, since: user.last_seen_at)
+              Email::Sender.new(message, :digest).send
+#               Jobs.enqueue(:user_email, type: :digest, user_id: user)
+              
             end                
           end
 
@@ -37,7 +42,6 @@ module DiscourseDailyEmail
                 .not_suspended
                 .joins(:user_option)
                 .where(id: enabled_ids)
-                .pluck(:user_id)
                 #where subscriber group member
           end
         end
