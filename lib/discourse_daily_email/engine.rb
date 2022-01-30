@@ -7,6 +7,7 @@ module DiscourseDailyEmail
       require_dependency 'email'
       require_dependency 'user_notifications'
       require_dependency 'user_serializer'
+      require_dependency 'enqueue_digest_emails'
       
       class ::UserSerializer
         attributes :user_daily_email_enabled
