@@ -20,7 +20,7 @@ module DiscourseDailyEmail
 
       module ::Jobs
         class DailyEmail < Jobs::Scheduled
-          every 1.minute
+          every 1.day
           
           def execute(args)
             
