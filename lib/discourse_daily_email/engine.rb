@@ -28,7 +28,7 @@ module DiscourseDailyEmail
 #               message = UserNotifications.digest()
 #               Email::Sender.new(message, :digest).send
               Jobs.enqueue(:user_email, type: :digest, user_id: user)
-            def                
+            end                
           end
 
           def target_users
