@@ -5,9 +5,8 @@ module DiscourseDailyEmail
       User.register_custom_field_type('user_daily_email_enabled', :boolean)
 
       require_dependency 'email'
-      require_dependency 'user_notifications'
-      require_dependency 'user_serializer'
       
+      require_dependency 'user_serializer'
       class ::UserSerializer
         attributes :user_daily_email_enabled
         def user_daily_email_enabled
@@ -19,8 +18,8 @@ module DiscourseDailyEmail
         end
       end
 
-      module Jobs
-        class DailyEmail < ::Jobs::Scheduled
+      module ::Jobs
+        class DailyEmail < Jobs::Scheduled
           every 1.minute
 
           def execute(args)
