@@ -25,15 +25,10 @@ module DiscourseDailyEmail
 
           def execute(args)
             target_users.each do |user|
-
 #               message = UserNotifications.digest()
-
 #               Email::Sender.new(message, :digest).send
-              
               Jobs.enqueue(:user_email, type: :digest, user_id: user)
-              
-              
-#             end
+            def                
           end
 
           def target_users
