@@ -24,18 +24,18 @@ module DiscourseDailyEmail
           every 1.minute
 
           def execute(args)
-            target_users.each do |user|
+#             target_users.each do |user|
 
-              message, skip_reason = UserNotifications.public_send(:digest, user, since: user.last_seen_at)
+#               message = UserNotifications.digest()
+
+#               Email::Sender.new(message, :digest).send
               
-              if message
-                message.to = user.email
-                begin
-                  Email::Sender.new(message, :digest).send
-                rescue => e
-                end
-              end
-            end
+#               Jobs.enqueue(:user_email, type: :digest, user_id: user_id)
+              
+              Jobs::EnqueueDigestEmails.new.execute(nil)
+
+              
+#             end
           end
 
           def target_users
