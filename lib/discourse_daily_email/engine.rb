@@ -32,7 +32,7 @@ module DiscourseDailyEmail
               
 #               Jobs.enqueue(:user_email, type: :digest, user_id: user_id)
               
-              Jobs::EnqueueDigestEmails.new.execute(nil)
+              EnqueueDigestEmails.new.execute({})
 
               
 #             end
