@@ -7,7 +7,6 @@ module DiscourseDailyEmail
       require_dependency 'email'
       require_dependency 'user_notifications'
       require_dependency 'user_serializer'
-      require_dependency 'enqueue_digest_emails'
       
       class ::UserSerializer
         attributes :user_daily_email_enabled
@@ -25,16 +24,14 @@ module DiscourseDailyEmail
           every 1.minute
 
           def execute(args)
-#             target_users.each do |user|
+            target_users.each do |user|
 
 #               message = UserNotifications.digest()
 
 #               Email::Sender.new(message, :digest).send
               
-#               Jobs.enqueue(:user_email, type: :digest, user_id: user_id)
+              Jobs.enqueue(:user_email, type: :digest, user_id: user)
               
-              EnqueueDigestEmails.new.execute({})
-
               
 #             end
           end
@@ -46,6 +43,7 @@ module DiscourseDailyEmail
                 .not_suspended
                 .joins(:user_option)
                 .where(id: enabled_ids)
+                .pluck(:user_id)
                 #where subscriber group member
           end
         end
