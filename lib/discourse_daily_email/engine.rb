@@ -2,6 +2,7 @@ module DiscourseDailyEmail
   class Engine < ::Rails::Engine
     isolate_namespace DiscourseDailyEmail
     config.after_initialize do
+      
       User.register_custom_field_type('user_daily_email_enabled', :boolean)
       require_dependency 'user_serializer'
       class ::UserSerializer
@@ -18,7 +19,6 @@ module DiscourseDailyEmail
       module Jobs
         class DailyEmail < ::Jobs::Scheduled
           every 1.day, at: '5:00 am' do
-          
           def execute(args)            
             users.each do |user|
               message = UserNotifications.digest(user, since: 1.day.ago)
@@ -36,6 +36,7 @@ module DiscourseDailyEmail
           end
         end
       end
+        
     end
   end
 end
