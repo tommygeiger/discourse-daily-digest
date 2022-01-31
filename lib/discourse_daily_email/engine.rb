@@ -18,7 +18,7 @@ module DiscourseDailyEmail
 
       module Jobs
         class DailyEmail < ::Jobs::Scheduled
-          every 1.day
+          every 1.day, at: '5:00 am'
 
           def execute(args)            
             users.each do |user|
