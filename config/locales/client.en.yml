@@ -1,6 +1,6 @@
 en:
   js:
     daily_email:
-      daily: "Receive Daily Email Digest"
-      preference_label: "Enable daily email digest"
-      instructions: "You will receive a daily email digest of recent site activity"
+      daily: "Daily Emails"
+      preference_label: "Opt in to daily emails"
+      instructions: "You'll receive an email every morning with top posts from the last 24 hours. If there were no posts, you won't receive an email."
