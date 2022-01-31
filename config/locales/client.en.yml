@@ -3,4 +3,4 @@ en:
     daily_email:
       daily: "Daily Emails"
       preference_label: "Opt in to daily emails"
-      instructions: "You'll receive an email every morning with top posts from the last 24 hours. If there were no posts, you won't receive an email."
+      instructions: "Receive an email each morning with top posts from the last 24 hours. If there were no posts, you won't receive an email. Subscription required."
