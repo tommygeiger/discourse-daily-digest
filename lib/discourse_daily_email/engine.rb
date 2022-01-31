@@ -4,6 +4,7 @@ module DiscourseDailyEmail
     config.after_initialize do
       
       User.register_custom_field_type('user_daily_email_enabled', :boolean)
+      require_dependency 'email'
       require_dependency 'user_serializer'
       class ::UserSerializer
         attributes :user_daily_email_enabled
@@ -17,7 +18,6 @@ module DiscourseDailyEmail
       end
 
       module Jobs
-        require_dependency 'email'
         class DailyEmail < ::Jobs::Scheduled
           every 1.day, at: '5:00 am' do
             
