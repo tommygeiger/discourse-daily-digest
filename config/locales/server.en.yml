@@ -1,13 +1,3 @@
 en:
   site_settings:
-    daily_email_enabled: 'Enable daily email plugin'
-  user_notifications:
-    mailing_list:
-      why: "All activity on %{site_link} for %{date}"   
-      subject_template: "%{email_prefix} Digest %{date}"   
-      unsubscribe: "To unsubscribe %{unsubscribe_link}."   
-      from: "%{site_name} digest"    
-      new_topics: "New topics"    
-      topic_updates: "Topic updates"    
-      view_this_topic: "View this topic"    
-      back_to_top: "Back to top"
+    daily_email_enabled: 'Enable plugin)'
