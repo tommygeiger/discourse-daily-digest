@@ -16,16 +16,14 @@ module DiscourseDailyEmail
         end
       end
 
-      module ::Jobs
-        class DailyEmail < Jobs::Scheduled
+      module Jobs
+        class DailyEmail < ::Jobs::Scheduled
           every 1.minute
           
           def execute(args)            
             users.each do |user|
-              
               message = UserNotifications.digest(user, since: user.last_seen_at)
               Email::Sender.new(message, :digest).send
-              
             end                
           end
 
