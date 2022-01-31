@@ -1,3 +1,3 @@
-Discourse plugin to enable sending daily digest emails to users
+Discourse plugin to send daily digest emails to users. Basically a cron job to send digest emails at a certain time.
 
-Based on [Disourse MLM Daily Summary](https://github.com/procourse/discourse-mlm-daily-summary)
+Inspired by [Disourse MLM Daily Summary](https://github.com/procourse/discourse-mlm-daily-summary)
