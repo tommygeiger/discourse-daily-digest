@@ -34,7 +34,6 @@ module DiscourseDailyEmail
                 .not_suspended
                 .joins(:user_option)
                 .where(id: enabled_ids)
-#                 .joins("INNER JOIN discourse_subscriptions_customers ON users.id = discourse_subscriptions_customers.user_id")
           end
         end
       end
