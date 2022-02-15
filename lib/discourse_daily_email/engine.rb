@@ -18,7 +18,7 @@ module DiscourseDailyEmail
 
       module Jobs
         class DailyEmail < ::Jobs::Scheduled
-          daily at: 17.hours
+          daily at: 10.hours #10am UTC = 5am EST
 
           def execute(args)            
             users.each do |user|
