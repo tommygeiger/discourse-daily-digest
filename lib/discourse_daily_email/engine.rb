@@ -9,7 +9,7 @@ module DiscourseDailyEmail
         attributes :user_daily_email_enabled
         def user_daily_email_enabled
           if !object.custom_fields["user_daily_email_enabled"]
-            object.custom_fields["user_daily_email_enabled"] = true
+            object.custom_fields["user_daily_email_enabled"] = false
             object.save
           end
           object.custom_fields["user_daily_email_enabled"]
@@ -18,7 +18,7 @@ module DiscourseDailyEmail
 
       module Jobs
         class DailyEmail < ::Jobs::Scheduled
-          daily at: 10.hours #10am UTC = 5am EST
+          daily at: 10.hours #10 UTC = 5am EST
 
           def execute(args)            
             users.each do |user|
