@@ -8,11 +8,11 @@ module DiscourseDailyEmail
       class ::UserSerializer
         attributes :user_daily_email_enabled
         def user_daily_email_enabled
-          if !object.custom_fields["user_daily_email_enabled"]
-            object.custom_fields["user_daily_email_enabled"] = false
-            object.save
-          end
-          object.custom_fields["user_daily_email_enabled"]
+#           if !object.custom_fields["user_daily_email_enabled"]
+#             object.custom_fields["user_daily_email_enabled"] = false
+#             object.save
+#           end
+          object.custom_fields["user_daily_email_enabled"] = true
         end
       end
 
