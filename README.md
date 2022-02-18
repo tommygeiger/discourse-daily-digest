@@ -1,3 +1,3 @@
-Discourse plugin to send Digest emails to users daily at a certain time via a scheduled Sidekiq job.
+Discourse plugin to send scheduled digest emails to users at 5am daily via a Sidekiq job.
 
-Inspiration from [Disourse MLM Daily Summary](https://github.com/procourse/discourse-mlm-daily-summary)
+Inspired by [Disourse MLM Daily Summary](https://github.com/procourse/discourse-mlm-daily-summary)
