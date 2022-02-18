@@ -1,23 +1,23 @@
-module DiscourseDailyEmail
+module DiscourseDailyDigest
   class Engine < ::Rails::Engine
-    isolate_namespace DiscourseDailyEmail
+    isolate_namespace DiscourseDailyDigest
     config.after_initialize do
       
-      User.register_custom_field_type('opt_out', :boolean)
+      User.register_custom_field_type('unsubscribe', :boolean)
       require_dependency 'user_serializer'
       class ::UserSerializer
-        attributes :opt_out
-        def opt_out
-          if !object.custom_fields["opt_out"]
-            object.custom_fields["opt_out"] = false #daily email on by default
+        attributes :unsubscribe
+        def unsubscribe
+          if !object.custom_fields["unsubscribe"]
+            object.custom_fields["unsubscribe"] = false #on by default
             object.save
           end
-          object.custom_fields["opt_out"]
+          object.custom_fields["unsubscribe"]
         end
       end
 
       module Jobs
-        class DailyEmail < ::Jobs::Scheduled
+        class DailyDigest < ::Jobs::Scheduled
           daily at: 10.hours #10 UTC = 5am EST
 
           def execute(args)            
@@ -28,12 +28,12 @@ module DiscourseDailyEmail
           end
 
           def users
-            opt_out_ids = UserCustomField.where(name: "opt_out", value: "true").pluck(:user_id)
+            unsubscribed_ids = UserCustomField.where(name: "unsubscribe", value: "true").pluck(:user_id)
             User.real
                 .activated
                 .not_suspended
                 .joins(:user_option)
-                .where.not(id: opt_out_ids)
+                .where.not(id: unsubscribed_ids)
           end
         end
       end
