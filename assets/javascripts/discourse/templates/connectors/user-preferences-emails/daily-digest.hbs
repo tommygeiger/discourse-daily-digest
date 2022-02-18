@@ -1,0 +1,8 @@
+{{#if siteSettings.daily_digest_enabled}}
+  <div class="control-group">
+    <label class="control-label">{{i18n 'daily_digest.control_label'}}</label>
+    {{preference-checkbox labelKey="daily_digest.preference_checkbox" checked=model.custom_fields.unsubscribe}}
+    {{log this}}
+    <div class='instructions'>{{{i18n 'daily_digest.instructions'}}}</div>
+  </div>
+{{/if}}
