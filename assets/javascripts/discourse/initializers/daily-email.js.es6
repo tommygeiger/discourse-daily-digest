@@ -4,23 +4,23 @@ import EmailPreferencesController from 'discourse/controllers/preferences/emails
 import UserController from 'discourse/controllers/user';
 
 export default {
-  name: 'daily_email',
+  name: 'daily_digest',
 
   initialize(container){
     EmailPreferencesController.reopen({
-      dailyEmailUnsubscribe(){
+      dailyDigestUnsubscribe(){
         const user = this.get("model");
-        return user.get("custom_fields.daily_email_unsubscribe");
+        return user.get("custom_fields.unsubscribe");
       },
 
-      @observes("model.custom_fields.daily_email_unsubscribe")
-      _setUserDailyEmail(){
+      @observes("model.custom_fields.unsubscribe")
+      _setUserDailyDigest(){
         var attrNames = this.get("saveAttrNames");
         attrNames.push('custom_fields');
         this.set("saveAttrNames", attrNames);
         const user = this.get("model");
-        const dailyEmailUnsubscribe = user.custom_fields.daily_email_unsubscribe;
-        user.set("custom_fields.daily_email_unsubscribe", dailyEmailUnsubscribe);
+        const unsubscribe = user.custom_fields.unsubscribe;
+        user.set("custom_fields.unsubscribe", unsubscribe);
       }
     })
   }
