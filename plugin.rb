@@ -4,7 +4,7 @@
 # author: Tommy Geiger
 # url: https://www.github.com/tommygeiger/discourse-daily-email
 
-enabled_site_setting :plugin_enabled
+enabled_site_setting :daily_email_enabled
 DiscoursePluginRegistry.serialized_current_user_fields << "opt_out"
 load File.expand_path('../lib/discourse_daily_email/engine.rb', __FILE__)
 after_initialize do
