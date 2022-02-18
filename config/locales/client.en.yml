@@ -2,5 +2,5 @@ en:
   js:
     daily_email:
       daily: "Daily Emails"
-      preference_label: "Opt in to daily emails"
-      instructions: "Receive an email each morning with top posts from the last 24 hours. If there were no posts, you won't receive an email. Subscription required."
+      preference_label: "Check this box to UNSUBSCRIBE from daily emails"
+      instructions: "Daily emails are on by default--check box above to unsubscribe. If on, you'll receive an email each morning with an activity summary of the last 24hrs. If there was no activity you won't receive an email. Subscribtion required."
