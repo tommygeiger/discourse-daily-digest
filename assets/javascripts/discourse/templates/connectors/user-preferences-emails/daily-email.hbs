@@ -1,7 +1,7 @@
-{{#if siteSettings.daily_email_enabled}}
+{{#if siteSettings.daily_digest_enabled}}
   <div class="control-group">
-    <label class="control-label">{{i18n 'daily_email.daily'}}</label>
-    {{preference-checkbox labelKey="daily_email.preference_label" checked=model.custom_fields.user_daily_email_enabled}}
+    <label class="control-label">{{i18n 'daily_digest.control_label'}}</label>
+    {{preference-checkbox labelKey="daily_email.preference_checkbox" checked=model.custom_fields.unsubscribe}}
     {{log this}}
     <div class='instructions'>{{{i18n 'daily_email.instructions'}}}</div>
   </div>
