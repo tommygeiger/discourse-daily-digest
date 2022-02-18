@@ -1,5 +1,5 @@
 # name: discourse-daily-email
-# about: Daily email digest for subscribers
+# about: Daily email digest
 # version: 1.0
 # author: Tommy Geiger
 # url: https://www.github.com/tommygeiger/discourse-daily-email
