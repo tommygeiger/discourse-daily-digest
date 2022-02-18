@@ -9,7 +9,7 @@ module DiscourseDailyEmail
         attributes :opt_out
         def opt_out
           if !object.custom_fields["opt_out"]
-            object.custom_fields["opt_out"] = false #opt in by default
+            object.custom_fields["opt_out"] = false #daily email on by default
             object.save
           end
           object.custom_fields["opt_out"]
