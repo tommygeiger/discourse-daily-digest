@@ -8,19 +8,19 @@ export default {
 
   initialize(container){
     EmailPreferencesController.reopen({
-      userDailyEmailEnabled(){
+      dailyEmailUnsubscribe(){
         const user = this.get("model");
-        return user.get("custom_fields.user_daily_email_enabled");
+        return user.get("custom_fields.daily_email_unsubscribe");
       },
 
-      @observes("model.custom_fields.user_daily_email_enabled")
+      @observes("model.custom_fields.daily_email_unsubscribe")
       _setUserDailyEmail(){
         var attrNames = this.get("saveAttrNames");
         attrNames.push('custom_fields');
         this.set("saveAttrNames", attrNames);
         const user = this.get("model");
-        const userDailyEmailEnabled = user.custom_fields.user_daily_email_enabled;
-        user.set("custom_fields.user_daily_email_enabled", userDailyEmailEnabled);
+        const dailyEmailUnsubscribe = user.custom_fields.daily_email_unsubscribe;
+        user.set("custom_fields.daily_email_unsubscribe", dailyEmailUnsubscribe);
       }
     })
   }
