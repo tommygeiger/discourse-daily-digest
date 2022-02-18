@@ -1,6 +1,6 @@
 en:
   js:
     daily_digest:
-      name: "Daily Digest"
-      label: "Check this box to UNSUBSCRIBE from daily digest emails"
-      info: "Daily digest emails are on by default--check box above to unsubscribe. When on, you'll receive an email each morning with an activity summary of the last 24hrs. If there was no activity you won't receive an email. Subscription required."
+      control_label: "Daily Digest"
+      preference_checkbox: "Check this box to UNSUBSCRIBE from daily digest emails"
+      instructions: "Daily digest emails are on by default--check box above to unsubscribe. When on, you'll receive an email each morning with an activity summary of the last 24hrs. If there was no activity you won't receive an email. Subscription required."
