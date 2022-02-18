@@ -1,4 +1,4 @@
 plugins:
-  daily_email_enabled:
+  plugin_enabled:
     default: true
     client: true
